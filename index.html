@@ -8,30 +8,88 @@
     /* ===== Experience Section ===== */
 #experience {
   padding: 60px 20px;
-  background: #fff;
+  background: #f0f0f0;
   color: #333;
+}
+.animate-photo {
+  opacity: 0;
+  transform: translateX(50px); /* start slightly right */
+  animation: slideInPhoto 1s forwards;
+  animation-delay: 1.5s; /* appears after button */
+  position: relative;
+}
+
+@keyframes slideInPhoto {
+  0% { opacity: 0; transform: translateX(50px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+/* Optional: Blob animation for a soft floating effect */
+.blob {
+  animation: floatBlob 3s ease-in-out infinite alternate;
+}
+
+@keyframes floatBlob {
+  0% { transform: translateY(0px) rotate(0deg); }
+  100% { transform: translateY(-10px) rotate(5deg); }
+}
+#home {
+  background: linear-gradient(135deg, #cce5ff, #e6f2ff);
+  background-size: 400% 400%; /* allows smooth gradient movement */
+  animation: gradientMove 15s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+#home a {
+  display: inline-block;
+  background: #ff6b6b;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#home a:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(255, 107, 107, 0.5);
+}
+#home a {
+  animation: floatButton 3s ease-in-out infinite;
+}
+
+@keyframes floatButton {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
 }
 
 #experience h2 {
   font-size: 2.2rem;
   text-align: center;
   margin-bottom: 40px;
-  color: #4CAF50;
+  color: black;
 }
 
 .experience-card {
-  background: #f9f9f9;
-  padding: 20px;
-  margin-bottom: 25px;
-  border-left: 5px solid #4CAF50;
+  background: white;
+  padding: 40px;
+  margin: 0 auto 25px auto;  
+   
+  border-left: 5px solid #ff6b6b;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  max-width: 700px;
 }
 
 .experience-card h3 {
   margin-bottom: 5px;
   font-size: 1.4rem;
-  color: #222;
+color: #1e293b;
 }
 
 .experience-card .company {
@@ -43,6 +101,8 @@
 
 .experience-card ul {
   margin-left: 20px;
+   /* removes bullets */
+  padding-left: 0;
 }
 
 .experience-card ul li {
@@ -59,7 +119,7 @@
 .education h2 {
   font-size: 2.2rem;
   margin-bottom: 30px;
-  color: #0078ff;
+  
   position: relative;
 }
 
@@ -69,7 +129,7 @@
   margin: 15px auto;
   max-width: 800px;
   text-align: left;
-  border-left: 5px solid #0078ff;
+  border-left: 5px solid   #ff6b6b;;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   border-radius: 10px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -82,7 +142,7 @@
 
 .edu-card h3 {
   font-size: 1.4rem;
-  color: #222;
+color: #1e293b;
   margin-bottom: 5px;
 }
 
@@ -93,45 +153,169 @@
 
 .edu-year {
   font-weight: bold;
-  color: #0078ff;
+  color: #475569;
   margin: 8px 0;
 }
 
-.edu-details {
-  font-size: 0.95rem;
-  color: #333;
-  line-height: 1.6;
-}
+
 
     /* ===== Projects Section ===== */
+
+.project-images {
+  display: flex;
+  gap: 10px;
+  justify-content: center; /* center images */
+  flex-wrap: wrap; /* wrap on smaller screens */
+  margin-top: 10px;
+}
+
+.project-images img {
+  width: 30%; /* 3 images side by side */
+  height: auto;
+  border: 3px solid #ff6b6b;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+
+.project-images img:hover {
+  transform: scale(1.05);
+}
+/* Modal Background */
+/* Full-Screen Modal Background */
+.modal {
+
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.95);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Full-Screen Modal Content */
+.modal-content {
+  position: relative;
+  width: 90%;
+  max-width: 900px;
+}
+
+.modal-content img {
+  width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* Next/Prev buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+  font-size: 30px;
+  padding: 8px 16px;
+  border-radius: 50%;
+  user-select: none;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  z-index: 10000;
+}
+
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 20px;
   max-width: 1000px;
-  margin: auto;
-  margin-top: 30px;
+  margin: 20px auto 0 auto;
+  justify-items: start; /* Aligns cards to left */
 }
 
+
+/* Project card style */
 .project-card {
   background: #ffffff;
-  border-radius: 12px;
+
   padding: 20px;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+ height: auto;     /* maintains aspect ratio */
+  object-fit: cover; /* keeps proportions without distortion */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: left;
   border-top: 6px solid #ff6b6b;
+  opacity: 0; /* hidden initially for animation */
+  transform: translateY(20px); /* start slightly below */
 }
+
+/* Image style */
+/* Project card images */
+.project-card img {
+  width: 100%;      /* full width of card */
+  height: auto;     /* maintain aspect ratio */
+  max-height: 300px; /* optional max height */
+  object-fit: cover;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: 2px solid #ff6b6b;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+
+.project-card img:hover {
+  transform: scale(1.05);
+}
+
+
+/* Animation for cards */
+.animate-card {
+  animation: fadeInUp 0.8s forwards;
+}
+
+.animate-card:nth-child(1) { animation-delay: 0.2s; }
+.animate-card:nth-child(2) { animation-delay: 0.4s; }
+.animate-card:nth-child(3) { animation-delay: 0.6s; }
+.animate-card:nth-child(4) { animation-delay: 0.8s; }
+.animate-card:nth-child(5) { animation-delay: 1s; }
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
 
 .project-card h3 {
   margin-bottom: 10px;
-  color: #ff6b6b;
+ color: #1e293b;
   font-size: 1.3rem;
 }
 
 .project-card p {
   font-size: 1rem;
-  color: #555;
+color: #475569;
   margin-bottom: 10px;
 }
 
@@ -139,7 +323,7 @@
   display: inline-block;
   margin-top: 5px;
   color: #fff;
-  background: #ff6b6b;
+   background: #2a9df4;
   padding: 8px 14px;
   border-radius: 6px;
   text-decoration: none;
@@ -148,13 +332,9 @@
 }
 
 .project-card a:hover {
-  background: #e63946;
+  background: #1e7fc1;
 }
 
-.project-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 10px 18px rgba(0,0,0,0.2);
-}
 .achievements {
   padding: 60px 20px;
   background: linear-gradient(135deg, #f9fafb, #eef2ff);
@@ -164,7 +344,7 @@
 .achievements h2 {
   font-size: 2.5rem;
   margin-bottom: 30px;
-  color: #4f46e5;
+  color: black;
   position: relative;
 }
 
@@ -176,6 +356,7 @@
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   transition: transform 0.3s ease;
+    border-left: 6px solid #ff6b6b;
 }
 
 .achievement-item:hover {
@@ -184,15 +365,33 @@
 
 .achievement-item h3 {
   font-size: 1.5rem;
-  color: #1e3a8a;
+ color: #1e293b;
   margin-bottom: 10px;
 }
 
 .achievement-item p {
   font-size: 1rem;
-  color: #374151;
+ color: #475569;
 }
 /* ===== Contact Section ===== */
+.animate-button {
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+  animation: fadeInUpButton 1s forwards;
+  animation-delay: 1.2s; /* appears after text */
+  display: inline-block;
+}
+
+.animate-button:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+@keyframes fadeInUpButton {
+  0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
 .contact-info {
   text-align: center;
   margin-top: 20px;
@@ -204,14 +403,14 @@
 }
 
 .contact-info a {
-  color: #0073e6;
+  color: #2a9df4;
   text-decoration: none;
   font-weight: 500;
 }
 
 .contact-info a:hover {
   text-decoration: underline;
-  color: #005bb5;
+  color: #1e7fc1
 }
 
     /* ===== Skills Section ===== */
@@ -235,13 +434,13 @@
 
 .skill-card h3 {
   margin-bottom: 10px;
-  color: #ff6b6b;
+  color: #1e293b;
   font-size: 1.3rem;
 }
 
 .skill-card p {
   font-size: 1rem;
-  color: #555;
+color: #475569;
 }
 
 .skill-card:hover {
@@ -255,22 +454,50 @@
     align-items: center;
     justify-content: center;
     gap: 20px;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
   }
+#home h1 {
+  font-size: 2.8rem;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
 
-  #home img {
+#home h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #e0e7ff;
+}
+#home a {
+  display: inline-block;
+  background: #b0c2cf;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+#home a:hover {
+  background: #1e7fc1;
+}
+
+  /* #home img {
     width: 180px;
     height: 180px;
     border-radius: 50%;
     object-fit: cover;
     border: 4px solid #ff6b6b;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  }
+  } */
 
-  #home p {
-    max-width: 600px;
-    font-size: 1.1rem;
-    line-height: 1.6;
-  }
+#home p {
+  font-style: italic;
+  color: #cfd8f1;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
     /* ===== Reset & Base ===== */
     * {
       margin: 0;
@@ -280,43 +507,131 @@
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       scroll-behavior: smooth;
-      background: #f5f5f5;
+background: #f0f4f8;
+
+
+
+
+
+
+
       color: #333;
     }
+/* Common style for animated text */
+.animate-text {
+  opacity: 0;
+  transform: translateY(20px); /* start slightly lower */
+  animation: fadeInUp 1s forwards;
+}
+
+/* Add delay for each element to appear one by one */
+.animate-text:nth-child(1) {
+  animation-delay: 0.2s;
+}
+.animate-text:nth-child(2) {
+  animation-delay: 0.5s;
+}
+.animate-text:nth-child(3) {
+  animation-delay: 0.8s;
+}
+
+/* Keyframes */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Headings */
+#home h1.animate-text {
+  color: white; /* stronger, professional */
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2); /* optional */
+}
+
+/* Subheading */
+#home h2.animate-text {
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+/* Paragraph */
+#home p.animate-text {
+  color: white;
+}
 
     /* ===== Header ===== */
     header {
-      background: linear-gradient(90deg, #333, #555);
-      color: white;
-      padding: 20px;
-      text-align: center;
-      font-size: 1.5rem;
-      letter-spacing: 2px;
+     position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
     }
 
     /* ===== Navigation ===== */
     nav {
-      background: #222;
-      padding: 12px;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 18px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+      display: flex; /* + horizontal layout */
+  justify-content: space-between; /* + name left, links right */
+  align-items: center;
+  background: #0D0D0D; /* + gradient */
+  padding: 12px 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      padding: 8px 14px;
-      border-radius: 5px;
-      transition: 0.3s;
-    }
-    nav a:hover {
-      background: #ff6b6b;
-    }
+    .nav-left {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.nav-links {
+  display: flex;
+  gap: 18px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  background: #ff6b6b;
+  color: white;
+  transform: scale(1.1);
+}
+
+.hamburger {
+  display: none;
+  cursor: pointer;
+  font-size: 1.8rem;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: #222;
+    flex-direction: column;
+    gap: 12px;
+    padding: 15px;
+    border-radius: 0 0 8px 8px;
+  }
+  .nav-links.show {
+    display: flex;
+  }
+  .hamburger {
+    display: block;
+  }
+}
 
     /* ===== Sections ===== */
     section {
@@ -325,7 +640,7 @@
       text-align: center;
     }
     section:nth-child(even) {
-      background: #f0f0f0;
+      background: #f0f4f8;
     }
     section:nth-child(odd) {
       background: #ffffff;
@@ -401,205 +716,313 @@
       border-radius: 6px;
       font-size: 1rem;
     }
-    button {
-      background: #ff6b6b;
-      color: white;
-      border: none;
-      padding: 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    button:hover {
-      background: #e63946;
-    }
+ button {
+  background: #2a9df4;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #1e7fc1;
+}
+
+
+
+
+
+
   </style>
 </head>
 <body>
   <header>
-    <h1>Arpita Naik</h1>
-  </header>
-
-  <!-- Navigation -->
-  <nav>
+    <nav>
+<div class="nav-left">PORTFOLIO</div>
+<div class="hamburger" onclick="toggleMenu()">☰</div>
+<div class="nav-links">
     <a href="#home">Home</a>
-    <a href="#about">About</a>
+      <a href="#education">Education</a>
+       <a href="#experience">Experience</a>
     <a href="#skills">Skills</a>
     <a href="#projects">Projects</a>
-    <a href="#experience">Experience</a>
-    <a href="#education">Education</a>
-    <a href="#achievements">Achievements</a>
-    <a href="#contact">Contact</a>
-    <a href="#timeline">Timeline</a>
-  </nav>
+   
+  
+    <a href="#achievements">Certifications</a>
+   <a href="#contact" class="animate-button">Contact </a>
+
+    </div>
+    </nav>
+    
+  </header>
+
+ 
+<!-- linear-gradient(135deg, #ffeedd, #fff5f0) -->
 
   <!-- Sections -->
-  <section id="home"><h2>Introduction</h2><img src="IMG-20220902-WA0002.jpg" alt="My Photo"><p> "Hello, my name is Arpita. I am passionate about software development and technology, with a strong interest in building innovative and user-friendly applications.I enjoy learning new tools, solving challenging problems, and constantly improving my knowledge to grow both personally and professionally. My career goal is to become a skilled software developer and contribute to impactful projects."</p></section>
-  <section id="about">
-  <h2>About Me</h2>
-  <p>
-    I am Arpita, an aspiring <b>software developer</b> with a passion for building 
-    innovative, efficient, and user-friendly applications. I enjoy turning ideas 
-    into reality through <b>clean code, creative problem-solving, and continuous learning</b>.  
-  </p>
-  <p>
-    My areas of interest include <b>web development, front-end design, and full-stack solutions</b>.  
-    I have experience working with technologies like <b>HTML, CSS, JavaScript, React, Python, 
-    and databases</b>. I love exploring new tools, frameworks, and approaches that can 
-    enhance my skills and help me contribute to impactful projects.  
-  </p>
-  <p>
-    Outside of coding, I enjoy <b>designing UI/UX layouts, learning emerging technologies, 
-    and collaborating on projects</b> that challenge me to grow both personally and professionally.  
-    My ultimate goal is to become a skilled software developer and contribute to 
-    meaningful solutions that make a difference.  
-  </p>
+   
+<section id="home" style="background: #1E1E1E;
+
+
+
+
+
+
+
+
+ padding: 80px 20px;">
+  <div style="display: flex; flex-wrap: wrap; align-items: center; max-width: 1200px; margin: auto; gap: 40px;">
+    
+    <!-- Left Side -->
+    <div style="flex: 1; min-width: 300px;">
+      <h1 class="animate-text" style="font-size: 40px; text-align: left;margin: top 70px; padding-left: 45px;">Hello, I'm Arpita Naik</h1>
+<h2 class="animate-text"style="font-size: 22px;text-align: left; ">Aspiring Software Developer & UI/UX Designer</h2>
+
+      <p style="color: white; line-height: 1.6; margin-bottom: 25px;">
+        Detail-oriented and eager to start my career in a dynamic, innovative company where I can apply my skills in software 
+development and UX design. Passionate about learning, growing, and contributing to the creation of high quality, user
+friendly software solutions that deliver real value to users and the organization.
+      </p>
+      <a href="#contact" style="display: inline-block; background: #ff6b6b; color: white; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold; transition: 0.3s;">Contact Me</a>
+    </div>
+    
+    <!-- Right Side -->
+  <div style="flex: 1; min-width: 250px; display: flex; justify-content: center; align-items: center; position: relative;">
+  <!-- White shapeless background -->
+ 
+
+  <!-- Photo (any shape you want, rectangle here) -->
+<div class="home-image animate-photo" style="position: relative; width: 300px; height: 300px;">
+   <div class="blob" style="
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: white;
+    border-radius: 50% 40% 60% 35% / 40% 50% 30% 55%;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  "></div>
+
+    <img src="unnamed.jpg" alt="Arpita Naik" style="
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50% 40% 60% 35% / 40% 50% 30% 55%;
+    z-index: 1;
+    border: 4px solid #fff;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+  ">
+</div>
+
+</div>
+
+  </div>
+</section>
+
+  <section id="education" class="education">
+  <h2>Education</h2>
+ <div class="edu-card">
+    <h3> UX Design</h3>
+    <p class="edu-school">Tata Strive Skill Development Centre, Ponda Goa</p>
+    <p class="edu-year">2025</p>
+    
+  </div>
+  <div class="edu-card">
+    <h3>Bachelor of Engineering in Computer </h3>
+    <p class="edu-school">Shree Rayeshwar Institute of Engineering & Information Technology,Shiroda, Goa.</p>
+    <p class="edu-year">2021 – 2025</p>
+     <p >CGPA: 9.12</p>
+
+    
+  </div>
+
+  <div class="edu-card">
+    <h3>Higher Secondary Education</h3>
+    <p class="edu-school">The Kamakshi Education Society’s Higher Secondary School, Ponda, Goa  </p>
+    <p class="edu-year">2021</p>
+     <p >Percentage: 85%</p>
+    
+  </div>
+
+  <div class="edu-card">
+    <h3>Secondary Education</h3>
+    <p class="edu-school">M.E.F.S Fatima High School, Ponda, Goa  </p>
+    <p class="edu-year">2019</p>
+
+      <p >Percentage: 89%</p>
+   
+  </div>
+ 
+
+
+</section>
+<section id="experience">
+  <h2>Experience</h2>
+  
+  <div class="experience-card" style="padding-left: -6px;">
+    <h3>Software Developer Intern</h3>
+    <p class="company">Mograsys Technologies Pvt.Ltd, Margao, Goa | July 2024 – Aug 2024</p>
+    <ul>
+      <li style="text-align: left;">Implemented UI changes,Improved the alignment, spacing, and responsiveness, and bug fixes in applications using HTML, CSS, and JavaScript. .</li>
+  
+      <li style="text-align: left;">Learned and applied React.js concepts including components, props, state, and hooks in mini-projects. </li>
+    <li style="text-align: left;">Used Git for version control and collaborated in code review sessions and gained hands-on experience with Git, Github, Visual Studio Code, Visual Studio 2019, and SSMS.</li>
+    </ul>
+  </div>
+
+
+  
 </section>
 
   <section id="skills">
   <h2>My Skills</h2>
   <div class="skills-grid">
     <div class="skill-card">
-      <h3>Frontend</h3>
-      <p>HTML5, CSS3, JavaScript (ES6+), React, Bootstrap, Tailwind</p>
+      <h3>Programming Languages</h3>
+      <p> C, C++, Java, Python </p>
     </div>
     <div class="skill-card">
-      <h3>Backend</h3>
-      <p>Python, Node.js, Express, REST APIs</p>
+      <h3>Web Technologies</h3>
+      <p>HTML,CSS, JS, PHP</p>
     </div>
     <div class="skill-card">
       <h3>Databases</h3>
-      <p>MySQL, MongoDB, Firebase</p>
+      <p>MySQL</p>
     </div>
     <div class="skill-card">
       <h3>Tools & Platforms</h3>
-      <p>Git, GitHub, VS Code, Postman, Figma</p>
+      <p>Git, Github, Visual Studio Code, XAMPP, SSMS, Google Colab, Figma, and Canva</p>
     </div>
     <div class="skill-card">
-      <h3>Other Skills</h3>
-      <p>Problem Solving, UI/UX Design, Agile Methodologies</p>
+      <h3>Frameworks</h3>
+      <p>React.js(Basics)</p>
+    </div>
+    <div class="skill-card">
+      <h3>Concepts</h3>
+      <p>OOPS, DSA, DBMS, Web Development, SDLC,UI/UX. </p>
     </div>
   </div>
 </section>
 
   <section id="projects">
-  <h2>Projects / Work</h2>
-  <div class="projects-grid">
-    
-    <div class="project-card">
-      <h3>Portfolio Website</h3>
-      <p>A personal portfolio to showcase my skills, projects, and achievements.</p>
-      <p><b>Tech:</b> HTML, CSS, JavaScript</p>
-      <a href="#" target="_blank">🔗 View Project</a>
-    </div>
-    
-    <div class="project-card">
-      <h3>Employee Management System</h3>
-      <p>A web app to manage employee details, roles, and attendance with CRUD features.</p>
-      <p><b>Tech:</b> React, Node.js, MongoDB</p>
-      <a href="#" target="_blank">🔗 GitHub</a>
-    </div>
-    
-    <div class="project-card">
-      <h3>Speech Emotion Recognition</h3>
-      <p>AI model to detect human emotions from voice using deep learning.</p>
-      <p><b>Tech:</b> Python, TensorFlow, Librosa</p>
-      <a href="#" target="_blank">🔗 GitHub</a>
-    </div>
-    
-    <div class="project-card">
-      <h3>Weather App</h3>
-      <p>Responsive app that fetches real-time weather data from an API.</p>
-      <p><b>Tech:</b> JavaScript, OpenWeather API</p>
-      <a href="#" target="_blank">🔗 Live Demo</a>
-    </div>
-    
+  <h2>Projects</h2>
+
+  <!-- ===== Coding Projects ===== -->
+  <h3 style="margin-top: 30px;">Coding Projects</h3>
+  <div class="projects-grid coding-projects">
+<div class="project-card animate-card" >
+  <h4>Speech Emotion Recognition (Final Year Project)</h4>
+  <p>AI model to detect human emotions from voice using deep learning.</p>
+  <p><b>Tech:</b> Python, TensorFlow, Librosa and Streamlit</p>
+
+  <!-- View Images Button -->
+<button onclick="openModal(1)">View </button>
+</div>
+  <!-- Modal -->
+<!-- Modal -->
+<div id="modal-1" class="modal">
+  <span class="close" onclick="closeModal(1)">&times;</span>
+  
+  <!-- Slideshow container -->
+  <div class="modal-content">
+    <img id="modal-image-1" src="IMG-20250703-WA0000.jpg" alt="Project Image">
+ <button class="prev" onclick="changeImage(-1, 1)">&#10094;</button>
+    <button class="next" onclick="changeImage(1, 1)">&#10095;</button>
   </div>
+</div>
+
+
+
+
+      <div class="project-card animate-card">
+      <h4>Student Database System</h4>
+      <p>A Python & MySQL application to efficiently manage student records.</p>
+      <p><b>Tech Stack:</b> Python (Tkinter) and MySQL </p>
+    
+    </div>
+
+
+
+
+
+
+
+
+
+      <div class="project-card animate-card">
+      <h4>Employee Management System</h4>
+      <p>A PHP & MySQL using XAMPP application to efficiently manage employee records.</p>
+      <p><b>Tech:</b> HTML, CSS, JS</p>
+    </div>
+     
+     
+    <!-- Repeat for 5 projects -->
+  </div>
+
+  <!-- ===== UI/UX Projects ===== -->
+  <h3 style="margin-top: 40px;">UI/UX Projects/Assignments</h3>
+
+
+ 
+
+  <!-- Projects -->
+
+  <div class="projects-grid uiux-projects">
+   <div class="project-card animate-card">
+  <h4>Projects/Assignments</h4>
+  <p style="text-align: left;">I have worked on multiple UI/UX projects and assignments, including redesigning apps, cloning apps, websites, and tablet interfaces, and creating interactive UI concepts.I focused on designing user-friendly interfaces with consistent visuals and responsive layouts, using interactive prototypes to combine creativity with practical solutions.</p>
+  <p><b>Project: </b>MyTurn (UI/UX): A Token Management System lets customers book tokens for any service, reducing wait 
+times and improving bank efficiency. </p>
+  <p><b>Tech:</b> Figma</p>
+  <button onclick="openModal(2)" style="margin-left: 390px;">View</button> <!-- modal ID 2 -->
+</div>
+<div id="modal-2" class="modal">
+  <span class="close" onclick="closeModal(2)">&times;</span>
+  <div class="modal-content">
+    <img id="modal-image-2" src="assignment1-img1.jpg" alt="Assignment Image">
+    <button class="prev" onclick="changeImage(-1, 2)">&#10094;</button>
+    <button class="next" onclick="changeImage(1, 2)">&#10095;</button>
+  </div>
+</div>
+
+    <!-- Repeat for UI/UX projects -->
+  </div>
+   
 </section>
 
   <!-- ===== Experience Section ===== -->
-<section id="experience">
-  <h2>Experience</h2>
-  
-  <div class="experience-card">
-    <h3>Software Developer Intern</h3>
-    <p class="company">ABC Tech Solutions | June 2024 – Aug 2024</p>
-    <ul>
-      <li>Worked on developing a web-based employee management system using React and Flask.</li>
-      <li>Implemented RESTful APIs and optimized database queries, reducing response time by 30%.</li>
-      <li>Collaborated with a 5-member team in an Agile environment.</li>
-    </ul>
-  </div>
 
-  <div class="experience-card">
-    <h3>Freelance Web Developer</h3>
-    <p class="company">Self-employed | 2023 – Present</p>
-    <ul>
-      <li>Designed and deployed responsive websites for small businesses and personal portfolios.</li>
-      <li>Used HTML, CSS, JavaScript, and React to deliver user-friendly designs.</li>
-      <li>Integrated third-party APIs and payment gateways for clients.</li>
-    </ul>
-  </div>
 
-  <div class="experience-card">
-    <h3>Machine Learning Research Assistant</h3>
-    <p class="company">University Project | 2023 – 2024</p>
-    <ul>
-      <li>Conducted research on Speech Emotion Recognition (SER) using CNN+LSTM models.</li>
-      <li>Extracted audio features such as MFCC, pitch, and chroma using Librosa.</li>
-      <li>Achieved 85% accuracy in recognizing 7 emotions across multiple datasets.</li>
-    </ul>
-  </div>
-</section>
 
-  <section id="education" class="education">
-  <h2>Education</h2>
-
-  <div class="edu-card">
-    <h3>Bachelor of Technology in Computer Science</h3>
-    <p class="edu-school">XYZ University, India</p>
-    <p class="edu-year">2021 – 2025</p>
-    <p class="edu-details">Focused on software development, data structures, algorithms, and AI. 
-      Worked on multiple projects including Speech Emotion Recognition and Web Applications.</p>
-  </div>
-
-  <div class="edu-card">
-    <h3>Higher Secondary Education</h3>
-    <p class="edu-school">ABC School, India</p>
-    <p class="edu-year">2019 – 2021</p>
-    <p class="edu-details">Specialized in Science stream (PCM + Computer Science).</p>
-  </div>
-
-  <div class="edu-card">
-    <h3>Secondary Education</h3>
-    <p class="edu-school">ABC School, India</p>
-    <p class="edu-year">2017 – 2019</p>
-    <p class="edu-details">Completed with distinction, built foundation in mathematics and computing.</p>
-  </div>
-</section>
 
   <section id="achievements" class="achievements">
-  <h2>🏆 Achievements & Certifications</h2>
+  <h2> Certifications</h2>
   
   <div class="achievement-item">
-    <h3>Hackathon Winner</h3>
-    <p>Secured <strong>1st place</strong> in a national-level hackathon by building a real-time chatbot using AI & NLP.</p>
+    <h3> Linkedln Learning </h3>
+    <p>Completed a <strong>JavaScript Essential Training Certification</strong></p>
   </div>
 
   <div class="achievement-item">
-    <h3>Certified in Web Development</h3>
-    <p>Completed a <strong>Full-Stack Web Development Certification</strong> from XYZ Institute.</p>
+    <h3>Great Learning</h3>
+    <p>Completed a <strong>JavaScript Projects, Python, React JS, UI/UX for Beginners ,Github Tutorial for Beginners Certifications</strong></p>
+  </div>
+ <div class="achievement-item">
+    <h3> Infosys Springboard </h3>
+    <p>Completed a <strong>Python Fundamentals, Java Fundamentals Certification</strong></p>
   </div>
 
   <div class="achievement-item">
-    <h3>Google Cloud Certification</h3>
-    <p>Earned the <strong>Google Cloud Associate Engineer</strong> certification, showcasing skills in cloud computing.</p>
+    <h3>NPTEL</h3>
+    <p>Completed a <strong>The Joy of Computing using Python, Social Networks and Cyber security and privacy  Certifications</strong></p>
   </div>
 
-  <div class="achievement-item">
-    <h3>Top Performer Award</h3>
-    <p>Recognized as a <strong>Top Performer</strong> in academics and coding contests with consistent excellence.</p>
-  </div>
+ 
 </section>
 
 
@@ -607,41 +1030,105 @@
 <section id="contact" class="section">
   <h2 class="section-title">Contact</h2>
   <div class="contact-info">
-    <p>📧 Email: <a href="mailto:yourname@email.com">yourname@email.com</a></p>
-    <p>🔗 LinkedIn: <a href="" target="_blank">linkedin.com/in/yourprofile</a></p>
+    <p>📧 Email: arpitarn2707@gmail.com</a></p>
+    <p>🔗 LinkedIn: https://www.linkedin.com/in/arpitanaik27/</a></p>
+  <p> 📞 Phone No: +91-8698308711</p>
   </div>
 </section>
 
 
-  <section id="timeline">
-    <h2>Timeline / Journey</h2>
-    <div class="timeline">
-      <div class="timeline-item left">
-        <div class="timeline-content">
-          <h3>2020</h3>
-          <p>Started my journey as a developer.</p>
-        </div>
-      </div>
-      <div class="timeline-item right">
-        <div class="timeline-content">
-          <h3>2021</h3>
-          <p>Built my first major project.</p>
-        </div>
-      </div>
-      <div class="timeline-item left">
-        <div class="timeline-content">
-          <h3>2022</h3>
-          <p>Internship at XYZ Company.</p>
-        </div>
-      </div>
-      <div class="timeline-item right">
-        <div class="timeline-content">
-          <h3>2023</h3>
-          <p>Graduated & started working full-time.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+ 
+<script>
+  
+/* + Active link highlighting */
+const sections = document.querySelectorAll('section');
+const navLinks = document.querySelectorAll('.nav-links a');
 
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 80;
+    const sectionHeight = section.clientHeight;
+    if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+      current = section.getAttribute('id');
+    }
+  });
+
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === '#' + current) {
+      link.classList.add('active');
+    }
+  });
+});
+
+
+// Store images for each project modal
+const projectImages = {
+  1: [ // Speech Emotion Recognition
+    "IMG-20250703-WA0000.jpg",
+    "IMG-20250703-WA0001.jpg",
+    "IMG-20250703-WA0002.jpg"
+  ],
+  2: [ // UI/UX Assignment 1
+  "Screenshot (25462).png",
+    "Calculator,Alarm,Camera.PNG",
+    "Youtube clone.PNG",
+    "Netflix Clone.PNG",
+    "Login,Sign Up.PNG",
+    "samsung.PNG",
+    "3D Glassmorphism.PNG",
+    "ipad.PNG",
+    "Calender App Redesign(Arpita,Kartika, Govind).PNG",
+    "1.PNG",
+    "2.PNG",
+  ],
+  // Add more UI/UX assignments with new IDs here
+};
+
+// Track current image index for each modal
+const currentIndex = {
+  1: 0,
+  2: 0
+};
+
+
+function openModal(id) {
+  document.getElementById('modal-' + id).style.display = 'flex';
+  currentIndex[id] = 0; // start from first image
+  document.getElementById('modal-image-' + id).src = projectImages[id][0];
+}
+
+function closeModal(id) {
+  document.getElementById('modal-' + id).style.display = 'none';
+}
+
+function changeImage(direction, id) {
+  let images = projectImages[id];
+  currentIndex[id] += direction;
+  
+  if(currentIndex[id] < 0) currentIndex[id] = images.length - 1;
+  if(currentIndex[id] >= images.length) currentIndex[id] = 0;
+
+  document.getElementById('modal-image-' + id).src = images[currentIndex[id]];
+}
+
+// Close modal when clicking outside content
+window.onclick = function(event) {
+  const modals = document.querySelectorAll('.modal');
+  modals.forEach(modal => {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  });
+}
+
+
+
+/* + Hamburger toggle */
+function toggleMenu() {
+  document.querySelector('.nav-links').classList.toggle('show');
+}
+</script>
 </body>
 </html>
